@@ -2,6 +2,8 @@
 
 <html lang="en">
 <head>
+<script id="tpmc-perf-shim">(function(){var N=window.MutationObserver;if(N&&!N.__tpmc){var W=function(cb){var q=[],on=false,o=new N(function(m,obs){q.push.apply(q,m);if(on)return;on=true;(window.requestAnimationFrame||setTimeout)(function(){setTimeout(function(){on=false;var b=q;q=[];if(b.length){try{cb.call(obs,b,obs)}catch(e){console.error(e)}}},80)})});return o};W.prototype=N.prototype;W.__tpmc=1;window.MutationObserver=W}
+var SI=window.setInterval;window.setInterval=function(f,t){var a=[].slice.call(arguments,2);if(typeof f!=='function')return SI.apply(window,arguments);return SI(function(){if(document.hidden)return;return f.apply(this,a)},Math.max(t||0,t&&t<1000?1000:t||0))}})();</script>
 <script id="tpmc-contacts">
 /* Official TPMC contact routing. */
 window.TPMC_CONTACTS={
@@ -1395,7 +1397,7 @@ body.scl-night .scl-craft-learning{background:linear-gradient(135deg,#171c2b,#20
 </div>
 </div>
 </div><div class="bottom"><button aria-label="Comments" class="scl-bottom-item scl-bottom-comments" type="button"><span class="scl-bottom-icon">💬</span><span class="scl-bottom-label">Comments</span></button><button aria-label="Activities" class="scl-bottom-item scl-bottom-activities" type="button"><span class="scl-bottom-icon">📣</span><span class="scl-bottom-label">Activities</span></button><button aria-label="Profile" class="scl-bottom-item scl-bottom-profile" type="button"><span class="scl-bottom-icon">👤</span><span class="scl-bottom-label">Profile</span></button><button aria-label="Support" class="scl-bottom-item scl-bottom-support" type="button"><span class="scl-bottom-icon">🛟</span><span class="scl-bottom-label">Support</span></button><button aria-label="Open quick actions" class="scl-bottom-item scl-bottom-plus" type="button"><span class="scl-bottom-plus-symbol">+</span></button></div><div class="toast" id="toast"></div><div class="modal" id="picker"><div class="card"><div class="mh"><h3 id="sclPickerTitle">Select a Class</h3><button onclick="closeM('picker')">X</button></div><div class="picker-mode-note" id="sclPickerNote">Choose a class to continue.</div><div class="options">
-<button onclick="choose('JSS 1')">JSS 1 — Junior Secondary</button><button onclick="choose('JSS 2')">JSS 2 — Junior Secondary</button><button onclick="choose('JSS 3')">JSS 3 — Junior Secondary</button><button onclick="choose('SSS 1')">SSS 1 — Senior Secondary</button><button onclick="choose('SSS 2')">SSS 2 — Senior Secondary</button><button onclick="choose('SSS 3')">SSS 3 — Senior Secondary</button><button type="button" onclick="sclChooseVocational()">Vocational / Practical Training</button><button type="button" onclick="sclPrimaryPlaceholder()">Enter Primary Section ↗</button><button onclick="choose('JSS 1')">JSS 1 - Junior Secondary</button><button onclick="choose('JSS 2')">JSS 2 - Junior Secondary</button><button onclick="choose('JSS 3')">JSS 3 - Junior Secondary</button><button onclick="choose('SSS 1')">SSS 1 - Senior Secondary</button><button onclick="choose('SSS 2')">SSS 2 - Senior Secondary</button><button onclick="choose('SSS 3')">SSS 3 - Senior Secondary</button></div></div></div><div class="modal" id="reg"><div class="card scl-registration-card"><div class="mh"><div><h3>Child Registration</h3><small class="scl-reg-kicker">New admission and annual class registration / promotion — all in one clean form</small></div><button onclick="closeM('reg')" type="button">X</button></div>
+<button onclick="choose('JSS 1')">JSS 1 — Junior Secondary</button><button onclick="choose('JSS 2')">JSS 2 — Junior Secondary</button><button onclick="choose('JSS 3')">JSS 3 — Junior Secondary</button><button onclick="choose('SSS 1')">SSS 1 — Senior Secondary</button><button onclick="choose('SSS 2')">SSS 2 — Senior Secondary</button><button onclick="choose('SSS 3')">SSS 3 — Senior Secondary</button><button type="button" onclick="sclChooseVocational()">Vocational / Practical Training</button><button type="button" onclick="sclPrimaryPlaceholder()">Enter Primary Section ↗</button></div></div></div><div class="modal" id="reg"><div class="card scl-registration-card"><div class="mh"><div><h3>Child Registration</h3><small class="scl-reg-kicker">New admission and annual class registration / promotion — all in one clean form</small></div><button onclick="closeM('reg')" type="button">X</button></div>
 <div class="scl-reg-tabs" role="tablist"><button class="scl-reg-tab active" id="sclRegTabNew" onclick="sclRegistrationMode('new')" type="button">👤 NEW STUDENT</button><button class="scl-reg-tab" id="sclRegTabReturning" onclick="sclRegistrationMode('returning')" type="button">⬆️ RETURNING STUDENT / PROMOTION</button></div>
 <div class="scl-reg-body">
 <section id="sclNewStudentRegistration"><form id="form" novalidate onsubmit="return false;">
@@ -9300,7 +9302,7 @@ function webAnswer(q){
 var PRIM=['Daycare','Nursery 1','Nursery 2','Reception','Primary 1','Primary 2','Primary 3','Primary 4','Primary 5'],SEC=['JSS 1','JSS 2','JSS 3','SSS 1','SSS 2','SSS 3'];
 var PERIODS={A:[['p1','08:30','09:25'],['p2','09:25','10:20'],['p3','10:20','11:15'],['p4','11:30','12:25'],['p5','13:05','14:00'],['p6','14:00','14:55']],FRI:[['p1','08:00','08:40'],['p2','08:40','09:20'],['p3','09:20','10:00'],['p4','10:15','10:55'],['p5','10:55','11:35'],['p6','11:35','12:15']]};
 var WDAYS=[['mon','Monday'],['tue','Tuesday'],['wed','Wednesday'],['thu','Thursday'],['fri','Friday']];
-function stdSubjects(){var S=window.SCL_SUBJECTS||{};return{JSS:(S.JSS||[]).slice(),SSS:(S.SSS||[]).slice(),fromServer:false}}
+var NGS=["Accounting", "Agricultural Science", "Animal Husbandry", "Arabic", "Art (Fine Art)", "Auto Mechanics", "Basic Science", "Basic Technology", "Biology", "Book Keeping", "Building Construction", "Business Studies", "Catering Craft Practice", "Chemistry", "Christian Religious Studies", "Civic Education", "Clothing and Textiles", "Commerce", "Computer Studies / ICT", "Cosmetology", "Data Processing", "Digital Technologies", "Dyeing and Bleaching", "Economics", "Electrical Installation", "Electronics", "English Language", "English Studies", "Fishery", "Food and Nutrition", "Foods and Nutrition", "French", "Further Mathematics", "Geography", "Government", "Graphic Design", "Hausa", "Health Education", "History", "Home Economics", "Home Management", "Igbo", "Insurance", "Islamic Studies", "Katsina Studies", "Literature in English", "Marketing", "Mathematics", "Metalwork", "Music", "National Values", "Painting and Decorating", "Photography", "Physical and Health Education", "Physics", "Pre-Vocational Studies", "Religion and National Values", "Security Education", "Social Studies", "Store Management", "Technical Drawing", "Tiv", "Visual Art", "Vocational Aptitude", "Woodwork", "Yoruba"];window.SCL_NG_SUBJECTS=NGS;function stdSubjects(){return{JSS:NGS.slice(),SSS:NGS.slice(),fromServer:false}}
 var CAT=null,catP=null;
 function parseCatalog(rows){
  if(!Array.isArray(rows)||!rows.length)return null;var out={JSS:[],SSS:[]};
@@ -9313,7 +9315,7 @@ function parseCatalog(rows){
   if(!tg.length&&/BOTH|ALL|SECONDARY/.test(lv))tg=['JSS','SSS'];
   tg.forEach(function(k){if(out[k].indexOf(name)<0)out[k].push(name)})});
  if(!out.JSS.length&&!out.SSS.length)return null;
- var fb=stdSubjects();if(!out.JSS.length)out.JSS=fb.JSS;if(!out.SSS.length)out.SSS=fb.SSS;out.fromServer=true;return out}
+ var fb=stdSubjects();['JSS','SSS'].forEach(function(k){fb[k].forEach(function(x){if(out[k].indexOf(x)<0)out[k].push(x)});out[k].sort(function(a,b){return a.toLowerCase()<b.toLowerCase()?-1:1})});out.fromServer=true;return out}
 function loadCatalog(){
  if(catP)return catP;
  catP=new Promise(function(res){
@@ -9401,7 +9403,7 @@ function patchWorker(){
    if(T.level==='Primary')h=T.classes.length?'<div class="note">Primary class teachers are registered for all subjects of their class'+(T.classes.length>1?'es':'')+'. No subject list is needed.</div>':'';
    else if(!T.classes.length)h='<div class="note">Choose your classes above, then pick the subjects you teach in each class.</div>';
    else h=T.classes.map(function(c){var l=/^JSS/.test(c)?cat.JSS:cat.SSS,sel=T.subjects[c]||[];
-     return'<div class="hv2-subrow"><b>'+esc(c)+' — subjects you teach *</b><div class="chips">'+l.map(function(s){var on=sel.indexOf(s)>-1;return'<label class="'+(on?'on':'')+'"><input type="checkbox" hidden data-c="'+esc(c)+'" data-s="'+esc(s)+'"'+(on?' checked':'')+'>'+esc(s)+'</label>'}).join('')+'</div></div>'}).join('')+(CAT&&!CAT.fromServer?'<div class="note">Showing the standard school subject list because the live subject catalogue could not be reached.</div>':'');
+     return'<div class="hv2-subrow"><b>'+esc(c)+' — subjects you teach *</b><div class="chips">'+l.map(function(s){var on=sel.indexOf(s)>-1;return'<label class="'+(on?'on':'')+'"><input type="checkbox" hidden data-c="'+esc(c)+'" data-s="'+esc(s)+'"'+(on?' checked':'')+'>'+esc(s)+'</label>'}).join('')+'</div><div class="hv2-addsub" style="display:flex;gap:6px;margin-top:6px"><input type="text" list="sclNgSubjDL" data-addsub-in="'+esc(c)+'" placeholder="Type or search any subject…" autocomplete="off" style="flex:1;min-width:0"><button type="button" class="btn outline" data-addsub="'+esc(c)+'">Add</button></div></div>'}).join('')+'<datalist id="sclNgSubjDL">'+NGS.map(function(x){return'<option value="'+esc(x)+'">'}).join('')+'</datalist>'+(CAT&&!CAT.fromServer?'<div class="note">Showing the standard school subject list because the live subject catalogue could not be reached.</div>':'');
    $('#hv2Subjects',box).innerHTML=h}
   function drawNote(){
    var n=T.classes.length;
@@ -9431,6 +9433,7 @@ function patchWorker(){
    T.subjects={};Object.keys(seed.subjects||{}).forEach(function(c){T.subjects[seedClass(c)]=(seed.subjects[c]||[]).slice()});
    T.delivery=seed.delivery||'In school';$$('input[name=hv2Dv]',box).forEach(function(r){r.checked=r.value===T.delivery});
    T.slots=(seed.slots||[]).map(function(s){return Object.assign({},s,{className:seedClass(s.className)})});redraw()};
+  box.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-addsub]');if(!b)return;var c=b.getAttribute('data-addsub'),inp=box.querySelector('[data-addsub-in="'+c+'"]'),v=inp&&inp.value.trim();if(!v)return;var hit=NGS.filter(function(x){return x.toLowerCase()===v.toLowerCase()})[0];v=hit||v.replace(/\b\w/g,function(m){return m.toUpperCase()});var a=T.subjects[c]=T.subjects[c]||[];if(a.indexOf(v)<0)a.push(v);var cl=/^JSS/.test(c)?'JSS':'SSS',L=(CAT||stdSubjects())[cl];if(L.indexOf(v)<0){L.push(v);L.sort(function(x,y){return x.toLowerCase()<y.toLowerCase()?-1:1})}drawSubjects();drawTT();save()});
   box.addEventListener('change',function(e){
    var t=e.target;
    if(t.name==='hv2Lvl'){T.level=t.value;var l=list();T.classes=T.classes.filter(function(c){return l.indexOf(c)>-1});if(T.level==='Primary')T.slots=[];redraw()}
@@ -10243,7 +10246,7 @@ var tries=0,iv=setInterval(function(){init();if(document.querySelector('.hv2-gro
 
 <script id="scl-neon-glass-v102-js">
 (function(){
- var CL=['Daycare','Nursery 1','Nursery 2','Reception','Primary 1','Primary 2','Primary 3','Primary 4','Primary 5','JSS 1','JSS 2','JSS 3','SSS 1','SSS 2','SSS 3'];
+ var CL=['JSS 1','JSS 2','JSS 3','SSS 1','SSS 2','SSS 3'];
  var U=window.SCL_SUPABASE_URL,K=window.SCL_SUPABASE_PUBLISHABLE_KEY;
  var S={date:new Date().toLocaleDateString('en-CA',{timeZone:'Africa/Lagos'}),cls:'',open:null,srv:{},cloud:'Checking server…'};
  function LS(k,d){try{return JSON.parse(localStorage.getItem(k)||'null')||d}catch(e){return d}}
@@ -13143,12 +13146,13 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 (function(){'use strict';
   // Make the selected staff schedule resilient to older saved field names during profile editing/reapplication.
   function restoreStaffWorkPattern(){
-    var f=document.getElementById('workerForm'),e=window.__sclEdit;if(!f||!e)return;
+    var f=document.getElementById('workerForm'),e=window.__sclEdit;if(!f||!e||f.dataset.sclWpDone)return;f.dataset.sclWpDone='1';
     var raw=e.workPattern||e.work_pattern||e.employment_type||e.employmentType||(e.structured&&(e.structured.work_pattern||e.structured.employment_type))||'';
     var t=String(raw).toLowerCase().replace(/[^a-z]+/g,' ').trim();if(!t)return;
     var v=/^full( time)?$/.test(t)||/full time/.test(t)?'Full-Time':/half/.test(t)?'Half-Day Part-Time':/full day/.test(t)?'Full-Day Part-Time':/part|sched/.test(t)?'Scheduled Part-Time':'';
     if(!v)return;var r=f.querySelector('input[name="workPattern"][value="'+v+'"]');if(r&&!r.checked){r.checked=true;r.dispatchEvent(new Event('change',{bubbles:true}))}
   }
+  document.addEventListener('change',function(ev){if(ev.target&&ev.target.name==='workPattern'&&ev.isTrusted){var ff=document.getElementById('workerForm');if(ff)ff.dataset.sclWpDone='1'}},true);
   var mo=new MutationObserver(function(){restoreStaffWorkPattern()});
   if(document.documentElement)mo.observe(document.documentElement,{childList:true,subtree:true});
   // OCR-assisted staff credential entry. Uploaded original remains the source document; OCR text is only a draft.
