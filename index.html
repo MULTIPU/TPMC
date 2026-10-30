@@ -1197,7 +1197,13 @@ body.scl-night .scl-craft-learning{background:linear-gradient(135deg,#171c2b,#20
 
 </style>
 
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Pinyon+Script&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet"></head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Pinyon+Script&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet"><style id="tpmc-mobile-responsive-repair-v3">
+html,body{width:100%;max-width:100%;min-width:0;overflow-x:clip}body{margin:0}img,video,canvas,svg{max-width:100%}button,a,input,select,textarea{touch-action:manipulation}main,section,header,footer,nav,.wrap,.card{min-width:0}.wrap{width:min(100% - 24px,1240px);margin-inline:auto}
+@media(max-width:760px){body{font-size:15px;line-height:1.45}.wrap{width:calc(100% - 20px);padding-inline:0}main.wrap{padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))}#sclTabs{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;gap:6px!important;width:100%;max-width:100%;box-sizing:border-box;overflow-x:auto!important;overflow-y:hidden!important;padding:7px 10px!important;-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-x:contain;scroll-behavior:auto!important}#sclTabs::-webkit-scrollbar{display:none}#sclTabs button{flex:0 0 auto!important;min-width:82px!important;width:auto!important;min-height:42px;padding:9px 12px!important;white-space:nowrap!important;font-size:13px!important}.hv2-top,.hv2-top .hv2-in{width:100%;max-width:100%;min-width:0}.hv2-top .hv2-in{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:10px!important;padding:12px 14px!important;box-sizing:border-box}.hv2-brand{min-width:0;max-width:100%}.hv2-hero>.hv2-in{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:16px!important;padding:24px 16px!important}.hv2-frame{width:100%;min-width:0}.hv2-frame img{width:100%;height:auto;object-fit:contain}.bottom{position:fixed!important;left:8px!important;right:8px!important;bottom:max(6px,env(safe-area-inset-bottom,0px))!important;width:auto!important;max-width:none!important;z-index:1000!important;box-sizing:border-box!important}.bottom .scl-bottom-item{min-width:0!important;flex:1 1 0!important;max-width:none!important;font-size:10px!important}.bottom .scl-bottom-profile{flex:0 0 58px!important;width:58px!important;min-width:58px!important;max-width:58px!important;height:58px!important;margin-top:-15px!important}.wa{right:12px!important;bottom:calc(88px + env(safe-area-inset-bottom,0px))!important;max-width:calc(100vw - 24px);z-index:900!important}.columns,.stats,.hv2-groups,.grid,.role-grid{min-width:0;grid-template-columns:repeat(2,minmax(0,1fr))!important}.card,.hv2-tile,.hv2-grp,.scl-sec,.aac-section{min-width:0;overflow-wrap:anywhere}table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}input,select,textarea{max-width:100%;min-width:0;box-sizing:border-box}}
+@media(max-width:380px){.columns,.stats,.hv2-groups,.grid,.role-grid{grid-template-columns:minmax(0,1fr)!important}#sclTabs button{min-width:76px!important;font-size:12px!important;padding:8px 10px!important}}
+@media(prefers-reduced-motion:reduce){#sclTabs *,#hv2 *{scroll-behavior:auto!important;animation:none!important;transition-duration:.01ms!important}}
+</style>
+</head>
 <style id="tpmc-badge-fix">.scl-logo-front .logo,.gallery-logo img,.logo{border-radius:0!important}
 .tpc-wrap{text-align:left;background:#fffaf2;color:#260c0d;border:1px solid #e4cfa8;border-radius:18px;padding:14px;max-width:560px;margin:0 auto;font-family:inherit}
 .tpc-wrap .community-intro{margin-bottom:10px;color:#650007}.tpc-wrap .community-intro b{display:block;font-size:17px}.tpc-wrap .community-intro span{font-size:13px;opacity:.85}
@@ -9989,94 +9995,7 @@ function lesForm(){const d=LE.draft;let h='<h4>'+(d.u?'Edit':'New')+' lesson not
  return h+'<label>Status</label><select id="ln-status">'+[['draft','Draft'],['ready','Ready to teach'],['taught','Taught']].map(o=>'<option value="'+o[0]+'"'+(d.status===o[0]?' selected':'')+'>'+o[1]+'</option>').join('')+'</select><div style="margin-top:8px"><button class="scl300-cta" data-act="le-save" type="button">💾 Save</button><button class="scl300-cta warn" data-act="le-back" type="button">Cancel</button></div>'}
 function readLes(){const d=LE.draft;if(!d||!$('ln-topic'))return;d.cls=v('ln-cls');d.subject=v('ln-sub');d.term=v('ln-term');d.week=v('ln-week');d.date=v('ln-date');d.dur=v('ln-dur');d.topic=v('ln-topic');d.status=v('ln-status');LF.forEach(f=>d[f[0]]=($('ln-'+f[0])||{value:''}).value)}
 const nc=c=>String(c||'').toLowerCase().replace(/[^a-z0-9]/g,'');
-function lesPrint(x){const w=window.open('','_blank');if(!w){fb('Allow pop-ups to print.','warn');return}w.document.write('<!doctype html><html><head><title>Lesson Note</title><style>body{font-family:Georgia,serif;margin:24px;color:#222;line-height:1.5}h1,h2,h3{color:#6b0f1f;margin:.4em 0}table{border-collapse:collapse;width:100%;margin:10px 0}td,th{border:1px solid #999;padding:6px 8px;text-align:left}img{max-width:100%}@media print{button,.no-print{display:none!important}}</style>
-<style id="tpmc-mobile-responsive-repair-v2">
-html, body { width:100%; max-width:100%; min-width:0; overflow-x:clip; }
-body { margin:0; }
-img, video, canvas, svg { max-width:100%; }
-button, a, input, select, textarea { touch-action:manipulation; }
-main, section, header, footer, nav, .wrap, .card { min-width:0; }
-.wrap { width:min(100% - 24px,1240px); margin-inline:auto; }
-
-@media (max-width:760px) {
-  body { font-size:15px; line-height:1.45; }
-  .wrap { width:calc(100% - 20px); padding-inline:0; }
-  main.wrap { padding-bottom:calc(112px + env(safe-area-inset-bottom,0px)); }
-
-  /* The homepage's real tab strip is #sclTabs. Keep it horizontally scrollable. */
-  #sclTabs {
-    display:flex !important; flex-direction:row !important; flex-wrap:nowrap !important;
-    gap:6px !important; width:100%; max-width:100%; box-sizing:border-box;
-    overflow-x:auto !important; overflow-y:hidden !important;
-    padding:7px 10px !important; -webkit-overflow-scrolling:touch;
-    scrollbar-width:none; overscroll-behavior-x:contain;
-  }
-  #sclTabs::-webkit-scrollbar { display:none; }
-  #sclTabs button {
-    flex:0 0 auto !important; min-width:82px !important; width:auto !important;
-    min-height:42px; padding:9px 12px !important; white-space:nowrap !important;
-    font-size:13px !important;
-  }
-
-  /* Keep the legacy source navigation hidden; it is replaced by #sclTabs. */
-  #hv2 .hv2-nav { display:none !important; }
-
-  .hv2-top, .hv2-top .hv2-in { width:100%; max-width:100%; min-width:0; }
-  .hv2-top .hv2-in {
-    display:flex !important; flex-direction:column !important;
-    align-items:stretch !important; gap:10px !important;
-    padding:12px 14px !important; box-sizing:border-box;
-  }
-  .hv2-brand { min-width:0; max-width:100%; }
-  .hv2-hero > .hv2-in {
-    display:grid !important; grid-template-columns:minmax(0,1fr) !important;
-    gap:16px !important; padding:24px 16px !important;
-  }
-  .hv2-frame { width:100%; min-width:0; }
-  .hv2-frame img { width:100%; height:auto; object-fit:contain; }
-
-  .hero { display:grid !important; grid-template-columns:minmax(0,1fr) !important; gap:14px !important; padding:18px 14px !important; }
-  .hero .copy h1, .hero .copy h2 { font-size:clamp(1.65rem,7vw,2.35rem) !important; line-height:1.12 !important; overflow-wrap:anywhere; }
-  .hero .copy p { font-size:15px !important; }
-  .hero img, .scl-hero-poster { display:block; width:100% !important; height:auto !important; max-height:54vh; object-fit:contain; }
-
-  .bottom {
-    position:fixed !important; left:8px !important; right:8px !important;
-    bottom:max(6px,env(safe-area-inset-bottom,0px)) !important;
-    width:auto !important; max-width:none !important; z-index:1000 !important;
-    box-sizing:border-box !important;
-  }
-  .bottom .scl-bottom-item { min-width:0 !important; flex:1 1 0 !important; max-width:none !important; font-size:10px !important; }
-  .bottom .scl-bottom-profile { flex:0 0 58px !important; width:58px !important; min-width:58px !important; max-width:58px !important; height:58px !important; margin-top:-15px !important; }
-  .wa { right:12px !important; bottom:calc(88px + env(safe-area-inset-bottom,0px)) !important; max-width:calc(100vw - 24px); z-index:900 !important; }
-  .scl-logo-coin-dock, .scl-logo-coin-dock img { width:40px !important; height:40px !important; }
-
-  .columns, .stats, .hv2-groups, .grid, .role-grid { min-width:0; grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
-  .card, .hv2-tile, .hv2-grp, .scl-sec, .aac-section { min-width:0; overflow-wrap:anywhere; }
-  table { display:block; max-width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; }
-  input, select, textarea { max-width:100%; min-width:0; box-sizing:border-box; }
-}
-@media (max-width:380px) {
-  .columns, .stats, .hv2-groups, .grid, .role-grid { grid-template-columns:minmax(0,1fr) !important; }
-  #sclTabs button { min-width:76px !important; font-size:12px !important; padding:8px 10px !important; }
-}
-</style>
-
-
-<style id="tpmc-tab-performance-repair">
-/* Tab changes should be immediate and should not animate/repaint every large panel. */
-#hv2[data-scl-tab] :is(#home,#academics,#about,.hv2-statwrap,#life,#admissions,#faq,#contact) {
-  animation: none !important;
-  transition: none !important;
-}
-#sclTabs { scroll-behavior: auto !important; }
-#sclTabs button { transition: background-color .12s ease, color .12s ease, border-color .12s ease !important; }
-@media (prefers-reduced-motion: reduce) {
-  #hv2 *, #sclTabs * { scroll-behavior: auto !important; animation: none !important; transition-duration: .01ms !important; }
-}
-</style>
-
-</head><body><h1>The Pees Model College</h1><h2>Lesson Note</h2><table><tr><th>Class</th><td>'+esc(x.cls)+'</td><th>Subject</th><td>'+esc(x.subject)+'</td></tr><tr><th>Term / Week</th><td>'+esc(x.term)+' / '+esc(x.week)+'</td><th>Date / Duration</th><td>'+esc(x.date)+' / '+esc(x.dur)+' min</td></tr><tr><th>Topic</th><td colspan="3">'+esc(x.topic)+'</td></tr></table>'+LF.map(f=>'<h3>'+f[1]+'</h3><p style="white-space:pre-wrap">'+esc(x[f[0]]||'—')+'</p>').join('')+'<script>window.onload=function(){window.print()}<\/script>');w.document.close()}
+function lesPrint(x){const w=window.open('','_blank');if(!w){fb('Allow pop-ups to print.','warn');return}w.document.write('<!doctype html><html><head><title>Lesson Note</title><style>body{font-family:Georgia,serif;margin:24px;color:#222;line-height:1.5}h1,h2,h3{color:#6b0f1f;margin:.4em 0}table{border-collapse:collapse;width:100%;margin:10px 0}td,th{border:1px solid #999;padding:6px 8px;text-align:left}img{max-width:100%}@media print{button,.no-print{display:none!important}}</style>\n</head><body><h1>The Pees Model College</h1><h2>Lesson Note</h2><table><tr><th>Class</th><td>'+esc(x.cls)+'</td><th>Subject</th><td>'+esc(x.subject)+'</td></tr><tr><th>Term / Week</th><td>'+esc(x.term)+' / '+esc(x.week)+'</td><th>Date / Duration</th><td>'+esc(x.date)+' / '+esc(x.dur)+' min</td></tr><tr><th>Topic</th><td colspan="3">'+esc(x.topic)+'</td></tr></table>'+LF.map(f=>'<h3>'+f[1]+'</h3><p style="white-space:pre-wrap">'+esc(x[f[0]]||'—')+'</p>').join('')+'<script>window.onload=function(){window.print()}<\/script>');w.document.close()}
 const LEH={
  'le-f':()=>{LE.f.cls=v('lf-cls');LE.f.q=v('lf-q');lesRender()},
  'le-new':()=>{LE.draft={id:nid(),cls:'Primary 1',subject:'',term:'First Term',week:'',date:'',dur:'40',topic:'',status:'draft',objectives:'',prior:'',aids:'',content:'',activities:'',assess:'',assign:'',reflect:''};LE.pick=[];LE.view='edit';lesRender()},
@@ -10829,15 +10748,19 @@ function build(){var r=root();if(!r||document.getElementById('sclTabs'))return;
  var n=document.createElement('div');n.id='sclTabs';n.setAttribute('role','tablist');n.setAttribute('aria-label','Website sections');
  TABS.forEach(function(t){var b=document.createElement('button');b.type='button';b.dataset.k=t[0];b.textContent=t[1];b.setAttribute('role','tab');b.onclick=function(){
  var k=t[0],target=({about:'school',life:'school',academics:'services'})[k]||k;
- if(k==='collaboration'){if(window.openCollaboration)window.openCollaboration();else if(window.openSclCollaboration)window.openSclCollaboration();return}
- if(k==='materials'){if(window.openMaterials)window.openMaterials();else if(window.openSchoolMaterials)window.openSchoolMaterials();return}
+ if(k==='collaboration'||k==='materials'){
+   for(var j=0;j<document.querySelectorAll('#sclTabs button').length;j++)document.querySelectorAll('#sclTabs button')[j].setAttribute('aria-selected','false');
+   if(k==='collaboration'){if(typeof window.openCollaboration==='function')window.openCollaboration();else if(typeof window.openSclCollaboration==='function')window.openSclCollaboration();}
+   else {if(typeof window.openMaterials==='function')window.openMaterials();else if(typeof window.openSchoolMaterials==='function')window.openSchoolMaterials();}
+   return;
+ }
  setTab(target,false);
  var all=document.querySelectorAll('#sclTabs button');for(var j=0;j<all.length;j++)all[j].setAttribute('aria-selected',all[j]===b?'true':'false');
 };n.appendChild(b)});
  nav.parentNode.insertBefore(n,nav);
  var s='home';try{s=sessionStorage.getItem('sclTab')||'home'}catch(e){}
  setTab(s,false)}
-/* old links / scrollIntoView calls to a hidden section switch to its panel first */
+/* Route homepage anchor links to their owning panel without changing document scroll. */
 /* Keep the browser's native scrollIntoView behaviour. Only route known homepage anchors. */
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;
  var id=a.getAttribute('href').slice(1);if(MAP[id]){setTab(MAP[id],false)}},true);
