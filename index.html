@@ -10062,6 +10062,20 @@ main, section, header, footer, nav, .wrap, .card { min-width:0; }
 }
 </style>
 
+
+<style id="tpmc-tab-performance-repair">
+/* Tab changes should be immediate and should not animate/repaint every large panel. */
+#hv2[data-scl-tab] :is(#home,#academics,#about,.hv2-statwrap,#life,#admissions,#faq,#contact) {
+  animation: none !important;
+  transition: none !important;
+}
+#sclTabs { scroll-behavior: auto !important; }
+#sclTabs button { transition: background-color .12s ease, color .12s ease, border-color .12s ease !important; }
+@media (prefers-reduced-motion: reduce) {
+  #hv2 *, #sclTabs * { scroll-behavior: auto !important; animation: none !important; transition-duration: .01ms !important; }
+}
+</style>
+
 </head><body><h1>The Pees Model College</h1><h2>Lesson Note</h2><table><tr><th>Class</th><td>'+esc(x.cls)+'</td><th>Subject</th><td>'+esc(x.subject)+'</td></tr><tr><th>Term / Week</th><td>'+esc(x.term)+' / '+esc(x.week)+'</td><th>Date / Duration</th><td>'+esc(x.date)+' / '+esc(x.dur)+' min</td></tr><tr><th>Topic</th><td colspan="3">'+esc(x.topic)+'</td></tr></table>'+LF.map(f=>'<h3>'+f[1]+'</h3><p style="white-space:pre-wrap">'+esc(x[f[0]]||'—')+'</p>').join('')+'<script>window.onload=function(){window.print()}<\/script>');w.document.close()}
 const LEH={
  'le-f':()=>{LE.f.cls=v('lf-cls');LE.f.q=v('lf-q');lesRender()},
@@ -10809,7 +10823,7 @@ function setTab(k,scroll){var r=root();if(!r)return;r.setAttribute('data-scl-tab
  var b=document.querySelectorAll('#sclTabs button');for(var i=0;i<b.length;i++)b[i].setAttribute('aria-selected',b[i].dataset.k===k?'true':'false');
  try{var sel=document.querySelector('#sclTabs button[aria-selected="true"]'),bar=sel&&sel.parentNode;if(bar&&bar.scrollTo)bar.scrollTo({left:sel.getBoundingClientRect().left-bar.getBoundingClientRect().left+bar.scrollLeft-(bar.clientWidth-sel.offsetWidth)/2,behavior:scroll===false?'auto':'smooth'})}catch(e){}
  try{sessionStorage.setItem('sclTab',k)}catch(e){}
- if(scroll!==false){var h=r.querySelector('.hv2-top');window.scrollTo({top:Math.max(0,(h?h.offsetHeight:0)-4),behavior:'auto'})}}
+ /* Preserve the reader's current vertical position. Tab changes must not jump the page. */}
 function build(){var r=root();if(!r||document.getElementById('sclTabs'))return;
  var nav=r.querySelector('.hv2-nav');if(!nav)return;
  var n=document.createElement('div');n.id='sclTabs';n.setAttribute('role','tablist');n.setAttribute('aria-label','Website sections');
@@ -10817,17 +10831,14 @@ function build(){var r=root();if(!r||document.getElementById('sclTabs'))return;
  var k=t[0],target=({about:'school',life:'school',academics:'services'})[k]||k;
  if(k==='collaboration'){if(window.openCollaboration)window.openCollaboration();else if(window.openSclCollaboration)window.openSclCollaboration();return}
  if(k==='materials'){if(window.openMaterials)window.openMaterials();else if(window.openSchoolMaterials)window.openSchoolMaterials();return}
- setTab(target);
+ setTab(target,false);
  var all=document.querySelectorAll('#sclTabs button');for(var j=0;j<all.length;j++)all[j].setAttribute('aria-selected',all[j]===b?'true':'false');
 };n.appendChild(b)});
  nav.parentNode.insertBefore(n,nav);
  var s='home';try{s=sessionStorage.getItem('sclTab')||'home'}catch(e){}
  setTab(s,false)}
 /* old links / scrollIntoView calls to a hidden section switch to its panel first */
-var _s=Element.prototype.scrollIntoView;
-Element.prototype.scrollIntoView=function(){try{var sec=this.closest&&this.closest('#home,#academics,#about,#life,#admissions,#faq,#contact,.hv2-statwrap');
- if(sec){var k=sec.classList.contains('hv2-statwrap')?'school':MAP[sec.id];if(k&&root()&&root().getAttribute('data-scl-tab')!==k)setTab(k,false)}}catch(e){}
- return _s.apply(this,arguments)};
+/* Keep the browser's native scrollIntoView behaviour. Only route known homepage anchors. */
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;
  var id=a.getAttribute('href').slice(1);if(MAP[id]){setTab(MAP[id],false)}},true);
 var _si=window.setInterval;
@@ -10866,8 +10877,18 @@ function gateIcon(){var soc=document.getElementById('soc');if(!soc||soc.querySel
  b.onclick=function(){chooser().classList.add('on')};soc.appendChild(b)}
 /* the floating "Chat on WhatsApp" button keeps its admin-contact function */
 function init(){build();gateIcon()}
-var n=0,t=_si.call(window,function(){init();if(++n>60||(document.getElementById('sclTabs')&&document.querySelector('#soc .sclGateWa')))clearInterval(t)},300);
-document.addEventListener('DOMContentLoaded',init);
+function bootTabs(){
+ init();
+ if(document.getElementById('sclTabs')&&document.querySelector('#soc .sclGateWa'))return;
+ if(!window.MutationObserver)return;
+ var obs=new MutationObserver(function(){
+   init();
+   if(document.getElementById('sclTabs')&&document.querySelector('#soc .sclGateWa'))obs.disconnect();
+ });
+ obs.observe(document.documentElement,{childList:true,subtree:true});
+ setTimeout(function(){try{obs.disconnect()}catch(e){}},8000);
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bootTabs,{once:true});else bootTabs();
 /* service worker: network-first, versioned */
 if('serviceWorker' in navigator&&location.protocol.indexOf('http')===0){window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').then(function(r){r.update().catch(function(){})}).catch(function(){})})}
 })();
@@ -10883,46 +10904,8 @@ if('serviceWorker' in navigator&&location.protocol.indexOf('http')===0){window.a
 @media(prefers-reduced-motion:reduce){.hv2[data-scl-dir] :is(#home,#academics,#about,.hv2-statwrap,#life,#admissions,#faq,#contact){animation:none!important}}
 </style>
 <script id="scl-swipe-tabs-js">
-/* Swipe between Home, Services, School, Admission and Contact. Presentation only: it just presses the same gold tab buttons. */
-(function(){'use strict';
-var sx=0,sy=0,st=0,live=false,lastIdx=-1;
-function tabs(){return [].slice.call(document.querySelectorAll('#sclTabs button'))}
-function cur(){var b=tabs();for(var i=0;i<b.length;i++)if(b[i].getAttribute('aria-selected')==='true')return i;return 0}
-function blocked(t){
-  var d=document,b=d.body;
-  if(!d.getElementById('hv2')||!d.getElementById('sclTabs'))return true;
-  if(b.classList.contains('scl-public-locked')||b.classList.contains('scl-cur-on')||b.classList.contains('scl-profile-open'))return true;
-  if(d.querySelector('.modal.open,.modal.show,[aria-modal="true"].on,#sclWaChoice.on,#sclUniformZoom.on,#sclFirstAccessNotify.open'))return true;
-  if(!t||!t.closest)return true;
-  if(t.closest('[aria-modal="true"],[role="dialog"],input,textarea,select,canvas,iframe,video,[contenteditable="true"],#sclTabs,#sclShortcutPanel,#sclAura,[id*="aura" i]'))return true;
-  /* never steal a swipe from something that scrolls sideways (carousels, tables, chip rows) */
-  for(var e=t;e&&e!==d.body&&e.nodeType===1;e=e.parentElement){
-    if(e.scrollWidth>e.clientWidth+6){var o=getComputedStyle(e).overflowX;if(o==='auto'||o==='scroll')return true}
-  }
-  return false}
-document.addEventListener('touchstart',function(e){
-  live=false;if(e.touches.length!==1)return;
-  var p=e.touches[0];
-  if(p.clientX<20||p.clientX>window.innerWidth-20)return; /* leave the phone's own back-swipe alone */
-  if(blocked(e.target))return;
-  sx=p.clientX;sy=p.clientY;st=Date.now();live=true},{passive:true});
-document.addEventListener('touchcancel',function(){live=false},{passive:true});
-document.addEventListener('touchend',function(e){
-  if(!live)return;live=false;
-  var p=e.changedTouches[0],dx=p.clientX-sx,dy=p.clientY-sy;
-  if(Date.now()-st>900||Math.abs(dx)<60||Math.abs(dx)<Math.abs(dy)*1.6)return;
-  var sel=window.getSelection&&String(window.getSelection());if(sel)return;
-  var b=tabs(),i=cur(),n=dx<0?i+1:i-1; /* swipe left: next tab; swipe right: previous tab */
-  if(n<0||n>=b.length)return;
-  b[n].click()},{passive:true});
-/* remember which way we moved so the new page slides in from that side (also for taps on the gold tabs) */
-function watch(){
-  var r=document.getElementById('hv2');if(!r||r.__sclSw)return false;r.__sclSw=1;
-  lastIdx=cur();
-  new MutationObserver(function(){var i=cur();if(i===lastIdx)return;r.setAttribute('data-scl-dir',i>lastIdx?'next':'prev');lastIdx=i}).observe(r,{attributes:true,attributeFilter:['data-scl-tab']});
-  return true}
-var n=0,t=setInterval(function(){if(watch()||++n>80)clearInterval(t)},300);
-})();
+/* Deliberately no global swipe-to-switch-tabs handler.
+   Native touch scrolling and horizontal carousels retain gesture control. */
 </script>
 
 <!-- TPMC routing fix: modals that existing sign-in / attendance code opens but were missing from the page -->
@@ -11844,7 +11827,7 @@ html body .scl-v98-feedback[data-ok="0"]{background:linear-gradient(135deg,rgba(
  document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('.hv2-brand');if(!a)return;e.preventDefault();
   var h=document.querySelector('#sclTabs button[data-k=home]');if(h&&h.getAttribute('aria-selected')!=='true')h.click();
   try{window.scrollTo({top:0,behavior:'smooth'})}catch(_){window.scrollTo(0,0)}},false);
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',tag);else tag();setInterval(tag,3000)})();
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',tag,{once:true});else tag()})();
 </script>
 <script id="scl-auto-theme">
 /* Automatic time-based theme switching removed. Navigation, buttons, and page changes must never change the theme.
